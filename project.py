@@ -8,7 +8,8 @@ from keras.models import load_model
 face_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 
 # Returns the positions of eyes, nose, mouth, etc. for facial expression recognition
-predictor = dlib.shape_predictor('./shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('./shape_predictor_68_face_landmarks.dat') 
+#The shape_predictor_68_face_landmarks.dat file is too large, so it is referenced in the README file instead of being included in the directory.
 
 # facial expression labeling
 expression_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
