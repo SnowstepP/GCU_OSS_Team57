@@ -1,3 +1,21 @@
+# 표정 인식
+import cv2
+import dlib
+import numpy as np
+from keras.models import load_model
+
+# 얼굴 인식
+face_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
+
+# 표정 인식을 위한 눈, 코, 입등의 위치 반환
+predictor = dlib.shape_predictor('./shape_predictor_68_face_landmarks.dat')
+
+# 표정 라벨링
+expression_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
+
+# 표정 가중치 모델
+model = load_model('./emotion_model.hdf5')
+
 # 비디오 실행
 video_capture = cv2.VideoCapture(0)
 
