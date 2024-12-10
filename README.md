@@ -16,3 +16,11 @@ haarcascade_frontalface_default.xml for face detection, shape_predictor_68_face_
 When executed, the program activates the webcam and displays detected faces with green rectangles, along with the recognized expression above each face. 
 
 To exit the program, press the Esc key. The system performs better in well-lit environments, and the accuracy depends on the quality of the emotion recognition model.
+
+
+*Reference:* 
+- [emotional_model](https://github.com/petercunha/Emotion/blob/master/models/emotion_model.hdf5)
+
+- [haarcascade_frontalface_default](https://github.com/opencv/opencv/tree/master/data/haarcascades)
+
+- [shape_predictor_68_face_landmarks.dat](https://github.com/opencv/opencv/tree/master/data/haarcascades)
