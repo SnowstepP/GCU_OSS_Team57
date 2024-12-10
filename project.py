@@ -17,22 +17,32 @@ while True:
     # scaleFactor이 1에 가까울수록 표정 인식이 잘 되고 멀 수록 잘 안됨
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    #region 안에 얼굴이 인식되면 표정을 인식
+    for (x, y, w, h) in faces:
+        # 얼굴 크기에 맞춰 사각형 그리기
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+        # 얼굴 크기 반환
+        face_roi = gray[y:y+h, x:x+w]
+
+        # 표정을 인식하기 위해 표정 dataset과 똑같은 사이즈 변환
+        # dataset 이미지와 입력된 얼굴의 크기가 다르면 error 발생
+        face_roi = cv2.resize(face_roi, (64, 64))
+        face_roi = np.expand_dims(face_roi, axis=-1)
+        face_roi = np.expand_dims(face_roi, axis=0)
+        face_roi = face_roi / 255.0
+
+        # 모델을 통해 표정 분석
+        output = model.predict(face_roi)[0]
+
+        # 해당 표정의 값 반환
+        expression_index = np.argmax(output)
+
+        # 표정에 따른 label 값 저장
+        expression_label = expression_labels[expression_index]
+        # 표정 값 출력
+        cv2.putText(frame, expression_label, (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+
   # 출력
     cv2.imshow('Expression Recognition', frame)
 
